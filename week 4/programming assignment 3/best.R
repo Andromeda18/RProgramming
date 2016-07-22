@@ -50,8 +50,11 @@ best <- function(state, outcome) {
     #Select the data by state
     death_rate_by_state <- outcome_data[outcome_data$State == 
                                                         state,]
+    #Remove NAs
+    death_rate_by_state <- death_rate_by_state[!is.na(death_rate_by_state[col_name]),]
+    
     #Find the lowest death rate
-    lowest_death_rate <- min(death_rate_by_state[,col_name], na.rm = TRUE)
+    lowest_death_rate <- min(death_rate_by_state[,col_name])
     
     #Select the hospitals with the lowest death rate
     best_hospitals <- death_rate_by_state[death_rate_by_state[col_name]==lowest_death_rate,]
